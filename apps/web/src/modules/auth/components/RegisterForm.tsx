@@ -1,20 +1,20 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { login } from "@/services/authService";
+import { register } from "@/services/authService";
 import { CredentialsFields } from "./CredentialsFields";
 
-interface LoginFormProps {
-  /** Called after a successful login, e.g. to redirect the user. */
+interface RegisterFormProps {
+  /** Called after a successful registration (the user is auto-logged-in). */
   onSuccess?: (userId: string) => void;
 }
 
 /**
- * Login form for the auth module. Kept dumb about routing/redirects —
- * the caller decides what happens on success via onSuccess, which keeps
- * this component reusable (e.g. inside a modal vs. a dedicated page).
+ * Registration form. Mirrors LoginForm's shape deliberately — same
+ * onSuccess contract, same field component — so the two stay consistent
+ * as the auth module grows.
  */
-export function LoginForm({ onSuccess }: LoginFormProps) {
+export function RegisterForm({ onSuccess }: RegisterFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -26,7 +26,7 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
     setIsSubmitting(true);
 
     try {
-      const result = await login({ email, password });
+      const result = await register({ email, password });
 
       if (result.success) {
         onSuccess?.(result.user.id);
@@ -34,8 +34,6 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         setError(result.error);
       }
     } catch {
-      // Network/parsing failure, distinct from an application-level
-      // auth error returned by the API.
       setError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
@@ -49,17 +47,17 @@ export function LoginForm({ onSuccess }: LoginFormProps) {
         password={password}
         onEmailChange={setEmail}
         onPasswordChange={setPassword}
-        passwordAutoComplete="current-password"
+        passwordAutoComplete="new-password"
       />
 
       {error && (
-        <p role="alert" data-testid="login-error">
+        <p role="alert" data-testid="register-error">
           {error}
         </p>
       )}
 
       <button type="submit" disabled={isSubmitting}>
-        {isSubmitting ? "Signing in…" : "Sign in"}
+        {isSubmitting ? "Creating account…" : "Create account"}
       </button>
     </form>
   );
