@@ -1,0 +1,11 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/design-engine" },
+    { "path": "packages/manufacturing-engine" },
+    { "path": "packages/ai-engine" },
+    { "path": "packages/api-contracts" },
+    { "path": "packages/database" },
+    { "path": "apps/web" }
+  ]
+}

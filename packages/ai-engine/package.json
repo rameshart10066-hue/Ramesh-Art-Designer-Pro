@@ -1,0 +1,18 @@
+{
+  "name": "@ramesh/ai-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Claude API integration layer: design assistance, ad copy generation, prompt management. Single point of contact for all AI calls.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.32.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}

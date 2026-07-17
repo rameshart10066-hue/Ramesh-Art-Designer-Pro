@@ -1,0 +1,15 @@
+{
+  "name": "@ramesh/design-engine",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Parametric design logic: nameplates, finger-joint boxes, shape nesting, SVG generation. Migrated from Acrylic Design Studio.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -b",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  }
+}
