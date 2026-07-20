@@ -19,3 +19,4 @@ export * from "./auth";
 export * from "./dashboard";
 export * from "./catalog";
 export * from "./design-generator";
+export * from "./manufacturing";
