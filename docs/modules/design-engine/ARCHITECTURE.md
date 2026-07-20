@@ -40,12 +40,13 @@ other's job.
   solver (true 2D bin packing is NP-hard). Deterministic and simple,
   slightly wasteful of sheet space compared to an optimal solver.
 
-## Nesting algorithm duplication (cross-branch note)
+## Nesting is shared with manufacturing-engine (post-merge)
 
-`feature/manufacturing` (a separate, parallel branch) independently
-implements the same shelf-packing algorithm as `nestRectangles` here,
-because that branch was created before this one's nesting code existed
-and couldn't depend on an unmerged package. This is flagged in both
-branches' code comments for consolidation once they merge — the long-term
-intent is for `manufacturing-engine` to depend on this package's
-`nestRectangles` rather than maintain its own copy.
+`@ramesh/manufacturing-engine`'s `nestForManufacturing` depends on this
+package's `nestRectangles` directly rather than maintaining its own copy.
+During parallel branch development the two packages temporarily had
+duplicate shelf-packing implementations (`feature/manufacturing` was
+created before this package's nesting code existed); that duplication was
+removed when both branches merged into `develop`. See
+`docs/modules/manufacturing/ARCHITECTURE.md` for the manufacturing side of
+this.

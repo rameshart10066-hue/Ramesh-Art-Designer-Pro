@@ -5,12 +5,9 @@
  * - Manufacturing SVG (cut/engrave layer separation via LightBurn's
  *   stroke-color convention)
  * - DXF export (R12, for CAM/laser software that doesn't take SVG)
- * - Kerf-aware nesting (packRectangles + nestForManufacturing). Note:
- *   feature/design-engine (a separate, unmerged branch) implements the
- *   same shelf-packing algorithm for design-preview nesting. This
- *   package predates that branch and can't depend on its unmerged
- *   package, so the algorithm is intentionally duplicated here pending
- *   consolidation at merge time (see nesting/packRectangles.ts).
+ * - Kerf-aware nesting (nestForManufacturing, built on
+ *   @ramesh/design-engine's nestRectangles — no separate packing
+ *   implementation here; see nesting/nestForManufacturing.ts)
  * - Part numbering (category-coded, sequential)
  * - Material/machine profiles (cut/engrave speed & power, kerf)
  */
@@ -35,7 +32,7 @@ export {
   type ManufacturingNestingInput,
   type ManufacturingNestingResult,
 } from "./nesting/nestForManufacturing";
-export { packRectangles, type PackingShape, type PackingSheet } from "./nesting/packRectangles";
+export { nestRectangles, type NestingShape, type NestingSheet } from "@ramesh/design-engine";
 
 export { generatePartNumber, type PartNumberInput } from "./part-numbering/generatePartNumber";
 export { PartNumberSequencer } from "./part-numbering/PartNumberSequencer";

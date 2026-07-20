@@ -1,8 +1,8 @@
-import { packRectangles, type PackingShape, type PackingResult } from "./packRectangles";
+import { nestRectangles, type NestingShape, type NestingResult } from "@ramesh/design-engine";
 import { requireMaterialProfile } from "../material-profiles/materialProfiles";
 
 export interface ManufacturingNestingInput {
-  parts: PackingShape[];
+  parts: NestingShape[];
   sheetWidthMm: number;
   sheetHeightMm: number;
   materialProfileId: string;
@@ -10,7 +10,7 @@ export interface ManufacturingNestingInput {
   extraSpacingMm?: number;
 }
 
-export interface ManufacturingNestingResult extends PackingResult {
+export interface ManufacturingNestingResult extends NestingResult {
   materialProfileId: string;
   /** The spacing actually used (kerf-derived minimum + extraSpacingMm). */
   appliedSpacingMm: number;
@@ -22,12 +22,20 @@ export interface ManufacturingNestingResult extends PackingResult {
  * beam actually removes material. Spacing = 2x kerf (each part loses
  * kerf/2 on every edge) + any extra spacing the caller wants for
  * handling/breakout.
+ *
+ * Consolidated (post-merge) to reuse @ramesh/design-engine's
+ * nestRectangles rather than maintaining a separate copy of the same
+ * shelf-packing algorithm — see packages/design-engine's nesting module
+ * for the packing implementation itself. Before this merge, this package
+ * carried its own duplicate (packRectangles.ts) because feature/manufacturing
+ * was built before feature/design-engine's nesting code existed and
+ * couldn't depend on an unmerged package; that duplication is now removed.
  */
 export function nestForManufacturing(input: ManufacturingNestingInput): ManufacturingNestingResult {
   const material = requireMaterialProfile(input.materialProfileId);
   const appliedSpacingMm = material.kerfMm * 2 + (input.extraSpacingMm ?? 0);
 
-  const result = packRectangles(
+  const result = nestRectangles(
     input.parts,
     { widthMm: input.sheetWidthMm, heightMm: input.sheetHeightMm },
     appliedSpacingMm,

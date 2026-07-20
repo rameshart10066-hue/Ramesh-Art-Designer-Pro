@@ -37,19 +37,18 @@ DXF library. If more entity types are needed later (arcs, splines, layers
 beyond CUT/ENGRAVE), extend this writer rather than pulling in a full DXF
 library for two entity types.
 
-## Nesting: intentional duplication with feature/design-engine
+## Nesting: consolidated onto design-engine (post-merge)
 
-`packRectangles` in this package reimplements the same shelf-packing
-algorithm as `nestRectangles` in `packages/design-engine` (a separate,
-parallel branch). This branch (`feature/manufacturing`) was created
-before `feature/design-engine`'s nesting code existed, so depending on it
-wasn't possible without breaking this branch in isolation. Both
-`packages/manufacturing-engine/src/index.ts` and
-`packages/manufacturing-engine/src/nesting/packRectangles.ts` carry a
-comment flagging this for consolidation once the branches merge — the
-long-term intent is for this package to depend on
-`@ramesh/design-engine`'s `nestRectangles` instead of maintaining its own
-copy.
+`nestForManufacturing` uses `@ramesh/design-engine`'s `nestRectangles`
+directly. During parallel branch development, `feature/manufacturing` had
+its own copy of the same shelf-packing algorithm (`packRectangles.ts`),
+because that branch was created before `feature/design-engine`'s nesting
+code existed and couldn't depend on an unmerged package. That duplicate
+was removed as part of merging both branches into `develop` — this
+package now depends on `@ramesh/design-engine` (see `package.json` and
+the `tsconfig.json` project reference) and adds only the
+manufacturing-specific concern on top: deriving spacing from the
+material's kerf.
 
 ## Part numbering: in-memory sequencer, not yet persisted
 
