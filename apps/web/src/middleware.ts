@@ -8,7 +8,9 @@ import { SESSION_COOKIE_NAME, verifySessionToken } from "@/lib/auth/session";
  *
  * Extend the matcher below as protected modules (dashboard, admin, etc.)
  * come online; don't add unrelated route logic to this file.
- */
+ */// export const config = {
+//   matcher: ["/dashboard/:path*"],
+// };
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
   const user = token ? await verifySessionToken(token) : null;
@@ -23,5 +25,6 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*"],
+  matcher: [],
 };
+
