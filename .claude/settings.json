@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx vite *)",
+      "Bash(node -e ' *)",
+      "Bash(grep -E \"^\\\\.\\\\/|Type error|Failed|error TS\")",
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npx eslint *)",
+      "Bash(grep -E \"^E:|\\\\.tsx?$|error\")",
+      "Bash(curl -s -o /dev/null -w \"%{redirect_url}\\\\n\" http://localhost:3111/)",
+      "Bash(curl -s http://localhost:3111/dashboard)",
+      "Bash(curl -s http://localhost:3111/api/health)",
+      "Bash(curl -s -o /dev/null -w \"catalog: %{http_code}\\\\n\" http://localhost:3111/api/catalog)",
+      "Bash(curl -s -o /dev/null -w \"dashboard summary: %{http_code}\\\\n\" http://localhost:3111/api/dashboard/summary)",
+      "Bash(curl -s -w \"\\\\nstatus: %{http_code}\\\\n\" -X POST http://localhost:3111/api/manufacturing/part-number -H \"Content-Type: application/json\" -d '{\"categoryCode\":\"GNP\"}')",
+      "Bash(grep -E \"^\\\\s+\\\\d+:\\\\d+\\\\s+error|\\\\.tsx?$|\\\\.ts$\")"
+    ]
+  }
+}

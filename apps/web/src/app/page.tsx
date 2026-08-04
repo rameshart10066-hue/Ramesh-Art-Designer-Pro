@@ -1,12 +1,9 @@
+import { WelcomeDashboard } from "@/modules/welcome";
+
 /**
- * Landing page — placeholder until the first feature module (design studio,
- * marketing, or finance) is wired into src/modules/.
+ * Landing page — the professional Welcome Dashboard that opens before the
+ * Design Studio. Provides entry points to every main workflow.
  */
 export default function HomePage() {
-  return (
-    <main>
-      <h1>Ramesh Art Designer Pro</h1>
-      <p>Scaffold ready. Feature modules land under src/modules/.</p>
-    </main>
-  );
+  return <WelcomeDashboard />;
 }

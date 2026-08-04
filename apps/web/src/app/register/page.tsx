@@ -9,7 +9,7 @@ export default function RegisterPage() {
   return (
     <main>
       <h1>Create an account</h1>
-      <RegisterForm onSuccess={() => router.push("/dashboard")} />
+      <RegisterForm onSuccess={() => router.push("/")} />
     </main>
   );
 }

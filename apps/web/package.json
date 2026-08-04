@@ -17,11 +17,14 @@
     "@ramesh/database": "*",
     "@ramesh/design-engine": "*",
     "@ramesh/manufacturing-engine": "*",
+    "@types/three": "^0.185.1",
     "bcryptjs": "^3.0.3",
+    "heic2any": "^0.0.4",
     "jose": "^6.2.3",
     "next": "^15.0.3",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "three": "^0.185.1"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",

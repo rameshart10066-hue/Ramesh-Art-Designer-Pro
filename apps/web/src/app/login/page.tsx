@@ -15,7 +15,7 @@ export default function LoginPage() {
   return (
     <main>
       <h1>Sign in</h1>
-      <LoginForm onSuccess={() => router.push("/dashboard")} />
+      <LoginForm onSuccess={() => router.push("/")} />
     </main>
   );
 }

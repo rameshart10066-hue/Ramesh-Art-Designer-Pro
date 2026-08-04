@@ -1,12 +1,13 @@
-import { CatalogOverview, CatalogThemeProvider } from "@/modules/catalog";
+import { CatalogBrowser } from "@/modules/design-catalog";
+
+export const metadata = {
+  title: "Design Catalog — Ramesh Art Designer Pro",
+};
 
 export default function CatalogPage() {
   return (
-    <CatalogThemeProvider>
-      <main>
-        <h1>Catalog</h1>
-        <CatalogOverview />
-      </main>
-    </CatalogThemeProvider>
+    <main style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", background: "#020617", color: "#f8fafc" }}>
+      <CatalogBrowser />
+    </main>
   );
 }
